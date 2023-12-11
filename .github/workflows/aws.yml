@@ -91,7 +91,6 @@ jobs:
         env:
           ECR_REGISTRY: 880010711593.dkr.ecr.ap-northeast-2.amazonaws.com
           IMAGE_TAG: latest
-          JWT_TEST: jwt-ok
         run: |
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG 
