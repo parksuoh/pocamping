@@ -13,33 +13,3 @@ public record AddPlaceReservationRequestDto(
          LocalDate reservationDate
 ) {}
 
-
-//public class AddPlaceReservationRequestDto {
-//
-//    @Positive
-//    private Long placeId;
-//
-//    @FutureOrPresent
-//    private LocalDate reservationDate;
-//
-//    public AddPlaceReservationRequestDto(Long placeId, LocalDate reservationDate) {
-//        this.placeId = placeId;
-//        this.reservationDate = reservationDate;
-//    }
-//
-//    public Long getPlaceId() {
-//        return placeId;
-//    }
-//
-//    public void setPlaceId(Long placeId) {
-//        this.placeId = placeId;
-//    }
-//
-//    public LocalDate getReservationDate() {
-//        return reservationDate;
-//    }
-//
-//    public void setReservationDate(LocalDate reservationDate) {
-//        this.reservationDate = reservationDate;
-//    }
-//}

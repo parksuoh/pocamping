@@ -13,32 +13,3 @@ public record UpdatePlaceReservationDto(
 ) {}
 
 
-//public class UpdatePlaceReservationDto {
-//
-//    @Positive
-//    private Long placeReservationId;
-//
-//    @NotBlank
-//    private String reservcationStatus;
-//
-//    public UpdatePlaceReservationDto(Long placeReservationId, String reservcationStatus) {
-//        this.placeReservationId = placeReservationId;
-//        this.reservcationStatus = reservcationStatus;
-//    }
-//
-//    public Long getPlaceReservationId() {
-//        return placeReservationId;
-//    }
-//
-//    public void setPlaceReservationId(Long placeReservationId) {
-//        this.placeReservationId = placeReservationId;
-//    }
-//
-//    public String getReservcationStatus() {
-//        return reservcationStatus;
-//    }
-//
-//    public void setReservcationStatus(String reservcationStatus) {
-//        this.reservcationStatus = reservcationStatus;
-//    }
-//}

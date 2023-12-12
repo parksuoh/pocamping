@@ -12,31 +12,3 @@ public record UpdateOrderRequstDto(
 ) {}
 
 
-//public class UpdateOrderRequstDto {
-//
-//    @Positive
-//    private Long orderId;
-//    @NotBlank
-//    private String orderStatus;
-//
-//    public UpdateOrderRequstDto(Long orderId, String orderStatus) {
-//        this.orderId = orderId;
-//        this.orderStatus = orderStatus;
-//    }
-//
-//    public Long getOrderId() {
-//        return orderId;
-//    }
-//
-//    public void setOrderId(Long orderId) {
-//        this.orderId = orderId;
-//    }
-//
-//    public String getOrderStatus() {
-//        return orderStatus;
-//    }
-//
-//    public void setOrderStatus(String orderStatus) {
-//        this.orderStatus = orderStatus;
-//    }
-//}

@@ -5,6 +5,7 @@ import com.camping.camping.applications.UpdateOrderService;
 import com.camping.camping.dtos.GetOrdersResponseDto;
 import com.camping.camping.dtos.UpdateOrderRequstDto;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/admin/order")
 public class AdminOrderController {
