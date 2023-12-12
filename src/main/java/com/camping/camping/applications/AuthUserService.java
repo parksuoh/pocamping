@@ -40,6 +40,6 @@ public class AuthUserService {
 
         String accessToken = accessTokenGenerator.generate(user.name(), user.role());
 
-        return new AuthUserDto(user.name(), user.password(), accessToken);
+        return new AuthUserDto(user.name(), user.role().toString(), accessToken);
     }
 }
