@@ -8,5 +8,5 @@ public record GetOrdersResponseDto(
          String receiveName,
          String sddress,
          String orderStatus,
-         List<GetOrderItemDto> getOrderItemDtos
+         List<GetOrderItemDto> orderItems
 ) {}
