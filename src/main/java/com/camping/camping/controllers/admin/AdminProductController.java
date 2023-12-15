@@ -12,11 +12,13 @@ import com.camping.camping.applications.DeleteProductService;
 import com.camping.camping.applications.GetAdminProductDetailService;
 import com.camping.camping.applications.GetAdminProductsService;
 import com.camping.camping.applications.UpdateProdcutService;
+import com.camping.camping.applications.UpdateProductImageService;
 import com.camping.camping.dtos.AddAdminFirstOptionRequestDto;
 import com.camping.camping.dtos.AddAdminSecondOptionRequestDto;
 import com.camping.camping.dtos.AddProductRequestDto;
 import com.camping.camping.dtos.GetProductByCategoryDto;
 import com.camping.camping.dtos.GetProductDetailDto;
+import com.camping.camping.dtos.UpdateProductImageResponseDto;
 import com.camping.camping.dtos.UpdateProductRequestDto;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -56,9 +58,11 @@ public class AdminProductController {
     private final AddProductImageService addProductImageService;
     private final UpdateProdcutService updateProdcutService;
 
+    private final UpdateProductImageService updateProductImageService;
 
 
-    public AdminProductController(AddProductService addProductService, GetAdminProductsService getAdminProductsService, GetAdminProductDetailService getAdminProductDetailService, AddAdminProductFirstOptionService addAdminProductFirstOptionService, AddAdminProductSecondOptionService addAdminProductSecondOptionService, DeleteProductSecondOptionService deleteProductSecondOptionService, DeleteProductFirstOptionService deleteProductFirstOptionService, DeleteProductService deleteProductService, DeleteProductImageService deleteProductImageService, AddProductImageService addProductImageService, UpdateProdcutService updateProdcutService) {
+
+    public AdminProductController(AddProductService addProductService, GetAdminProductsService getAdminProductsService, GetAdminProductDetailService getAdminProductDetailService, AddAdminProductFirstOptionService addAdminProductFirstOptionService, AddAdminProductSecondOptionService addAdminProductSecondOptionService, DeleteProductSecondOptionService deleteProductSecondOptionService, DeleteProductFirstOptionService deleteProductFirstOptionService, DeleteProductService deleteProductService, DeleteProductImageService deleteProductImageService, AddProductImageService addProductImageService, UpdateProdcutService updateProdcutService, UpdateProductImageService updateProductImageService) {
         this.addProductService = addProductService;
         this.getAdminProductsService = getAdminProductsService;
         this.getAdminProductDetailService = getAdminProductDetailService;
@@ -70,6 +74,7 @@ public class AdminProductController {
         this.deleteProductImageService = deleteProductImageService;
         this.addProductImageService = addProductImageService;
         this.updateProdcutService = updateProdcutService;
+        this.updateProductImageService = updateProductImageService;
     }
 
 
@@ -90,6 +95,18 @@ public class AdminProductController {
         return deleteProductImageService.deleteProductImage(productImageId);
     }
 
+    @PatchMapping("/product-image")
+    public String updateProductImage(
+            @RequestPart(value = "UpdateProductImageResponseDto") UpdateProductImageResponseDto updateProductImageResponseDto,
+            @RequestPart(value = "image") MultipartFile image
+    ) throws IOException {
+
+
+        return updateProductImageService.updateProductImageService(
+                updateProductImageResponseDto.productId(),
+                updateProductImageResponseDto.productImageId(),
+                image);
+    }
 
 
     @PostMapping("/first-option")
