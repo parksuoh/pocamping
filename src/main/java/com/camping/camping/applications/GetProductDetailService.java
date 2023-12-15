@@ -44,6 +44,7 @@ public class GetProductDetailService {
 
         return new GetProductDetailDto(
                 product.id(),
+                product.category().id(),
                 product.name().toString(),
                 product.price().asLong(),
                 product.description().toString(),
