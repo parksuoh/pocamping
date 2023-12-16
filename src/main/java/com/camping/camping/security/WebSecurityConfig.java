@@ -72,7 +72,7 @@ public class WebSecurityConfig {
 
                             .requestMatchers(HttpMethod.GET,
                                     "/api/test",
-                                    "/api/category/*",
+                                    "/api/category",
                                     "/api/product/*",
                                     "/api/product/detail/*",
                                     "/api/place/*",
