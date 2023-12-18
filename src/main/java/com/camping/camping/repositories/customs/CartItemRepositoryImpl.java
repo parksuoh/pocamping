@@ -17,24 +17,24 @@ public class CartItemRepositoryImpl implements CartItemRepositoryCustom {
     public List<GetCartItemsDto> findByCartId(Long cartId) {
 
         String query = """
-                 SELECT ci.id AS cart_item_id, 
-                       ci.quantity, 
-                       p.id AS product_id, 
-                       p.name, 
+                 SELECT ci.id AS cart_item_id,
+                       ci.quantity,
+                       p.id AS product_id,
+                       p.name,
                        p.price,
-                       pf.id AS product_first_option_id, 
-                       pf.first_name AS product_first_option_name, 
+                       pf.id AS product_first_option_id,
+                       pf.first_name AS product_first_option_name,
                        pf.add_price AS product_first_add_price,
-                       ps.id AS product_second_option_id, 
-                       ps.second_name AS product_second_option_name, 
-                       ps.add_price AS product_second_add_price 
-                  FROM (SELECT * FROM cart_item WHERE cart_id=:cid ) ci 
-                 INNER JOIN product p 
-                    ON ci.product_id = p.id 
-                 INNER JOIN product_first_option pf 
-                    ON p.id = pf.product_id 
-                 INNER JOIN product_second_option ps 
-                    ON ps.product_first_option_id = pf.id;
+                       ps.id AS product_second_option_id,
+                       ps.second_name AS product_second_option_name,
+                       ps.add_price AS product_second_add_price
+                  FROM (SELECT * FROM cart_item WHERE cart_id=2 ) ci
+                  INNER JOIN product p
+                    ON ci.product_id = p.id
+                  INNER JOIN product_first_option pf
+                    ON ci.product_first_option_id = pf.id
+                  INNER JOIN product_second_option ps
+                    ON ci.product_second_option_id = ps.id;
                 """;
 
         return jdbcClient.sql(query)
@@ -58,15 +58,13 @@ public class CartItemRepositoryImpl implements CartItemRepositoryCustom {
                        ps.second_name AS product_second_option_name,
                        ps.add_price AS product_second_option_price,
                        ci.quantity
-                  FROM (SELECT * FROM cart_item WHERE id=:id) ci 
-                 INNER JOIN product p 
-                    ON ci.product_id = p.id 
-                 INNER JOIN product_first_option pf 
-                    ON p.id = pf.product_id 
-                   AND ci.product_first_option_id = pf.id 
-                 INNER JOIN product_second_option ps 
-                    ON ps.product_first_option_id = pf.id 
-                   AND ci.product_second_option_id = ps.id;
+                  FROM (SELECT * FROM cart_item WHERE id=:id) ci
+                  INNER JOIN product p
+                    ON ci.product_id = p.id
+                  INNER JOIN product_first_option pf
+                    ON ci.product_first_option_id = pf.id
+                  INNER JOIN product_second_option ps
+                    ON ci.product_second_option_id = ps.id;
                 """;
 
         return jdbcClient.sql(query)

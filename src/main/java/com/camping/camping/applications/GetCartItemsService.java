@@ -37,6 +37,8 @@ public class GetCartItemsService {
 
         List<GetCartItemsDto> cartItems = cartItemRepository.findByCartId(cart.id());
 
+        System.out.println(cartItems.size());
+
         return cartItems
                 .stream()
                 .map(cartItem -> {

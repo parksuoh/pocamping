@@ -11,7 +11,7 @@ public record AddOrderRequestDto(
         @NotBlank
         String address,
 
-         List<CartItemIdsDto> cartItemIds
+         List<Long> cartItemIds
 ) {}
 
 

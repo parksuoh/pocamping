@@ -75,7 +75,7 @@ public class WebSecurityConfig {
                                     "/api/category",
                                     "/api/product/*",
                                     "/api/product/detail/*",
-                                    "/api/place/*",
+                                    "/api/place",
                                     "/api/place/detail/*",
                                     "/api/place/reservations/*").permitAll()
 

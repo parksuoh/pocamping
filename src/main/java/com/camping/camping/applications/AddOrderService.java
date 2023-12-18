@@ -58,7 +58,7 @@ public class AddOrderService {
         this.productSecondOptionRepository = productSecondOptionRepository;
     }
 
-    public String addOrder(String name, String receiverName, String address, List<CartItemIdsDto> cartItemIds){
+    public String addOrder(String name, String receiverName, String address, List<Long> cartItemIds){
         Long cartTotalPrice = 0L;
         User user = userRepository
                 .findByName(name)
@@ -74,8 +74,8 @@ public class AddOrderService {
         orderRepository.save(newOrder);
 
 
-        for (CartItemIdsDto cartItemId : cartItemIds) {
-            GetCartItemByCartItemIdDto result = cartItemRepository.findByCartItemId(cartItemId.cartItemId());
+        for (Long cartItemId : cartItemIds) {
+            GetCartItemByCartItemIdDto result = cartItemRepository.findByCartItemId(cartItemId);
 
 
             Long unitPrice = result.productPrice()
@@ -112,7 +112,7 @@ public class AddOrderService {
 
             orderItemRepository.save(newOrderItem);
 
-             CartItem cartItem = cartItemRepository.findById(cartItemId.cartItemId())
+             CartItem cartItem = cartItemRepository.findById(cartItemId)
                      .orElseThrow(CartItemNotExist::new);
 
              cartItemRepository.delete(cartItem);
