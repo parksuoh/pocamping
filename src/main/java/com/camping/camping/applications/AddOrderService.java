@@ -12,7 +12,6 @@ import com.camping.camping.domains.vo.FirstOptionName;
 import com.camping.camping.domains.vo.Money;
 import com.camping.camping.domains.vo.Name;
 import com.camping.camping.domains.vo.SecondOptionName;
-import com.camping.camping.dtos.CartItemIdsDto;
 import com.camping.camping.dtos.GetCartItemByCartItemIdDto;
 import com.camping.camping.exceptions.CartItemNotExist;
 import com.camping.camping.exceptions.NameNotExist;
@@ -26,6 +25,7 @@ import com.camping.camping.repositories.ProductFirstOptionRepository;
 import com.camping.camping.repositories.ProductRepository;
 import com.camping.camping.repositories.ProductSecondOptionRepository;
 import com.camping.camping.repositories.UserRepository;
+import com.camping.camping.repositories.daos.JdbcCartItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,10 +45,11 @@ public class AddOrderService {
     private final ProductRepository productRepository;
     private final ProductFirstOptionRepository productFirstOptionRepository;
     private final ProductSecondOptionRepository productSecondOptionRepository;
+    private final JdbcCartItemRepository jdbcCartItemRepository;
 
 
 
-    public AddOrderService(UserRepository userRepository, CartItemRepository cartItemRepository, OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, ProductFirstOptionRepository productFirstOptionRepository, ProductSecondOptionRepository productSecondOptionRepository) {
+    public AddOrderService(UserRepository userRepository, CartItemRepository cartItemRepository, OrderRepository orderRepository, OrderItemRepository orderItemRepository, ProductRepository productRepository, ProductFirstOptionRepository productFirstOptionRepository, ProductSecondOptionRepository productSecondOptionRepository, JdbcCartItemRepository jdbcCartItemRepository) {
         this.userRepository = userRepository;
         this.cartItemRepository = cartItemRepository;
         this.orderRepository = orderRepository;
@@ -56,6 +57,7 @@ public class AddOrderService {
         this.productRepository = productRepository;
         this.productFirstOptionRepository = productFirstOptionRepository;
         this.productSecondOptionRepository = productSecondOptionRepository;
+        this.jdbcCartItemRepository = jdbcCartItemRepository;
     }
 
     public String addOrder(String name, String receiverName, String address, List<Long> cartItemIds){
@@ -75,7 +77,7 @@ public class AddOrderService {
 
 
         for (Long cartItemId : cartItemIds) {
-            GetCartItemByCartItemIdDto result = cartItemRepository.findByCartItemId(cartItemId);
+            GetCartItemByCartItemIdDto result = jdbcCartItemRepository.findByCartItemId(cartItemId);
 
 
             Long unitPrice = result.productPrice()

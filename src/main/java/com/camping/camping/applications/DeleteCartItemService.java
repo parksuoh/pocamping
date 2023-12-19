@@ -4,7 +4,6 @@ package com.camping.camping.applications;
 import com.camping.camping.domains.Cart;
 import com.camping.camping.domains.CartItem;
 import com.camping.camping.domains.User;
-import com.camping.camping.dtos.GetCartItemsDto;
 import com.camping.camping.exceptions.CartAndCartItemNotMatch;
 import com.camping.camping.exceptions.CartItemNotExist;
 import com.camping.camping.exceptions.NameNotExist;
@@ -13,8 +12,6 @@ import com.camping.camping.repositories.CartRepository;
 import com.camping.camping.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @Transactional

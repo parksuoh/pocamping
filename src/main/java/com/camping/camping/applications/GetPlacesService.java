@@ -7,6 +7,7 @@ import com.camping.camping.dtos.GetPlacesDto;
 import com.camping.camping.dtos.PlaceImageDto;
 import com.camping.camping.repositories.PlaceImageRepository;
 import com.camping.camping.repositories.PlaceRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +27,7 @@ public class GetPlacesService {
 
     public List<GetPlacesDto> getPlaces() {
 
-        List<Place> places = placeRepository.findAll();
+        List<Place> places = placeRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
 
         return places

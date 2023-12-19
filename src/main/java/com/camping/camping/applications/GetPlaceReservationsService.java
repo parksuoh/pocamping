@@ -29,7 +29,7 @@ public class GetPlaceReservationsService {
                 .orElseThrow(NameNotExist::new);
 
         return placeReservationRepository
-                .findByUser_Id(user.id())
+                .findByUser_IdOrderByIdDesc(user.id())
                 .stream()
                 .map(placeReservation -> new GetPlaceReservationResponseDto(
                             placeReservation.id(),

@@ -1,14 +1,13 @@
 package com.camping.camping.applications;
 
 import com.camping.camping.domains.Cart;
-import com.camping.camping.domains.CartItem;
 import com.camping.camping.domains.User;
 import com.camping.camping.dtos.CartItemsResponseDto;
 import com.camping.camping.dtos.GetCartItemsDto;
 import com.camping.camping.exceptions.NameNotExist;
-import com.camping.camping.repositories.CartItemRepository;
 import com.camping.camping.repositories.CartRepository;
 import com.camping.camping.repositories.UserRepository;
+import com.camping.camping.repositories.daos.JdbcCartItemRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +18,12 @@ import java.util.List;
 public class GetCartItemsService {
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
-    private final CartItemRepository cartItemRepository;
+    private final JdbcCartItemRepository jdbcCartItemRepository;
 
-    public GetCartItemsService(UserRepository userRepository, CartRepository cartRepository, CartItemRepository cartItemRepository) {
+    public GetCartItemsService(UserRepository userRepository, CartRepository cartRepository, JdbcCartItemRepository jdbcCartItemRepository) {
         this.userRepository = userRepository;
         this.cartRepository = cartRepository;
-        this.cartItemRepository = cartItemRepository;
+        this.jdbcCartItemRepository = jdbcCartItemRepository;
     }
 
     public List<CartItemsResponseDto> getCartItems(String name) {
@@ -35,7 +34,7 @@ public class GetCartItemsService {
 
         Cart cart = cartRepository.findTop1ByUser_Id(user.id());
 
-        List<GetCartItemsDto> cartItems = cartItemRepository.findByCartId(cart.id());
+        List<GetCartItemsDto> cartItems = jdbcCartItemRepository.findByCartId(cart.id());
 
         System.out.println(cartItems.size());
 

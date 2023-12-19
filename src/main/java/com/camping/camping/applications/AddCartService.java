@@ -7,7 +7,6 @@ import com.camping.camping.domains.Product;
 import com.camping.camping.domains.ProductFirstOption;
 import com.camping.camping.domains.ProductSecondOption;
 import com.camping.camping.domains.User;
-import com.camping.camping.exceptions.CartItemNotExist;
 import com.camping.camping.exceptions.NameNotExist;
 import com.camping.camping.exceptions.ProductFirstOptionNotExist;
 import com.camping.camping.exceptions.ProductNotExist;

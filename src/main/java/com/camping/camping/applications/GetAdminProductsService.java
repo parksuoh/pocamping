@@ -6,6 +6,7 @@ import com.camping.camping.dtos.GetProductByCategoryDto;
 import com.camping.camping.dtos.ProductImageDto;
 import com.camping.camping.repositories.ProductImageRepository;
 import com.camping.camping.repositories.ProductRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +26,7 @@ public class GetAdminProductsService {
 
     public List<GetProductByCategoryDto> getAdminProducts() {
 
-        List<Product> products = productRepository.findAll();
+        List<Product> products = productRepository.findAll(Sort.by(Sort.Direction.DESC, "id"));
 
         return products
                 .stream()

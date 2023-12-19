@@ -1,15 +1,17 @@
-package com.camping.camping.repositories.customs;
+package com.camping.camping.repositories.daos;
 
 import com.camping.camping.dtos.GetCartItemByCartItemIdDto;
 import com.camping.camping.dtos.GetCartItemsDto;
 import org.springframework.jdbc.core.simple.JdbcClient;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class CartItemRepositoryImpl implements CartItemRepositoryCustom {
+@Repository
+public class JdbcCartItemDao implements JdbcCartItemRepository {
 
     private final JdbcClient jdbcClient;
-    public CartItemRepositoryImpl(JdbcClient jdbcClient) {
+    public JdbcCartItemDao(JdbcClient jdbcClient) {
         this.jdbcClient = jdbcClient;
     }
 

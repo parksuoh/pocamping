@@ -13,7 +13,7 @@ public interface PlaceReservationRepository extends JpaRepository<PlaceReservati
 
     List<PlaceReservation> findByUser_IdAndPlace_IdAndReservationDate(Long userId, Long placeId, LocalDate reservationDate);
 
-    List<PlaceReservation> findByUser_Id(Long userId);
+    List<PlaceReservation> findByUser_IdOrderByIdDesc(Long userId);
 
     List<PlaceReservation> findAllByOrderByIdDesc();
 
