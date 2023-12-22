@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
 @Service
-@Transactional
 public class UpdateReservationService {
 
     private final PlaceReservationRepository placeReservationRepository;
@@ -23,23 +22,22 @@ public class UpdateReservationService {
     }
 
     public String updateReservation(Long placeReservationId, String reservationStatus) {
-        if (!reservationStatus.equals("REQUEST")
-                && !reservationStatus.equals("CONFIRM")
-                && !reservationStatus.equals("RESERVATION_CANCELED")){
-            throw new PlaceReservationStatusNotMatch();
-        }
+
+
+        ReservationStatus status = ReservationStatus.isInStatus(reservationStatus);
+
 
         PlaceReservation placeReservation = placeReservationRepository
                 .findById(placeReservationId)
                 .orElseThrow(PlaceReservationNotExist::new);
 
 
-        if(reservationStatus.equals("CONFIRM")) {
+        if(status.toString().equals("CONFIRM")) {
 
             LocalDate reservationDate = placeReservation.reservationDate();
             boolean isConfirmedInDate = placeReservationRepository
                     .existsByReservationStatusAndReservationDate(
-                            ReservationStatus.valueOf(reservationStatus),
+                            ReservationStatus.valueOf(status.toString()),
                             reservationDate
                     );
 
@@ -49,8 +47,14 @@ public class UpdateReservationService {
         }
 
 
+        if(status.toString().equals("REQUEST")){
+            placeReservation.toRequest();
+        } else if (status.toString().equals("CONFIRM")) {
+            placeReservation.toConfirm();
+        } else if (status.toString().equals("RESERVATION_CANCELED")) {
+            placeReservation.toCancel();
+        }
 
-        placeReservation.changeReservationStatus(ReservationStatus.valueOf(reservationStatus));
         placeReservationRepository.save(placeReservation);
 
         return "success";

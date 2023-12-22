@@ -3,13 +3,11 @@ package com.camping.camping.applications;
 import com.camping.camping.domains.Order;
 import com.camping.camping.domains.vo.OrderStatus;
 import com.camping.camping.exceptions.OrderNotExist;
-import com.camping.camping.exceptions.OrderStatusNotMatch;
 import com.camping.camping.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 public class UpdateOrderService {
 
     private final OrderRepository orderRepository;
@@ -19,16 +17,21 @@ public class UpdateOrderService {
     }
 
     public String updateOrder(Long orderId, String orderStatus) {
-        if (!orderStatus.equals("READY")
-                && !orderStatus.equals("DELIVERY")
-                && !orderStatus.equals("COMPLETE")
-                && !orderStatus.equals("CANCELED")){
-            throw new OrderStatusNotMatch();
-        }
+
+        OrderStatus status = OrderStatus.isInStatus(orderStatus);
 
         Order order = orderRepository.findById(orderId).orElseThrow(OrderNotExist::new);
 
-        order.changeOrderStatus(OrderStatus.valueOf(orderStatus));
+        if(status.toString().equals("READY")){
+            order.toReady();
+        } else if (status.toString().equals("DELIVERY")) {
+            order.toDelivery();
+        } else if (status.toString().equals("COMPLETE")) {
+            order.toComplete();
+        } else if (status.toString().equals("CANCELED")) {
+            order.toCanceled();
+        }
+
         orderRepository.save(order);
         return "success";
     }

@@ -1,5 +1,9 @@
 package com.camping.camping.domains.vo;
 
+import com.camping.camping.exceptions.OrderStatusNotMatch;
+
+import java.util.Arrays;
+
 public enum OrderStatus {
 
     READY("READY"),
@@ -15,5 +19,12 @@ public enum OrderStatus {
 
     public String toString() {
         return value;
+    }
+
+    public static OrderStatus isInStatus(String status){
+        return Arrays.stream(OrderStatus.values())
+                .filter(v -> v.value.equals(status))
+                .findFirst()
+                .orElseThrow(OrderStatusNotMatch::new);
     }
 }

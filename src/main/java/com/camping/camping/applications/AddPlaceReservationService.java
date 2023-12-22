@@ -19,7 +19,6 @@ import java.util.List;
 import static com.camping.camping.domains.vo.ReservationStatus.REQUEST;
 
 @Service
-@Transactional
 public class AddPlaceReservationService {
 
     private final UserRepository userRepository;

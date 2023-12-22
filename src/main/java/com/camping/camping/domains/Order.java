@@ -86,4 +86,23 @@ public class Order {
     public void changeOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
     }
+
+    public void toReady() {
+        this.orderStatus = OrderStatus.READY;
+    }
+
+    public void toDelivery() {
+        this.orderStatus = OrderStatus.DELIVERY;
+    }
+
+    public void toComplete() {
+        this.orderStatus = OrderStatus.COMPLETE;
+    }
+
+    public void toCanceled() {
+        this.orderStatus = OrderStatus.CANCELED;
+    }
+
+
+
 }
