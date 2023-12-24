@@ -25,7 +25,7 @@ public class ControllerTest {
     protected String adminAccessToken;
 
     @Value("${jwt.secret}")
-    private String secret = "CAMPT";
+    private String secret;
 
     private Algorithm algorithm;
 
@@ -51,11 +51,5 @@ public class ControllerTest {
 
     }
 
-    @Test
-    @DisplayName("test 성공")
-    void ttteessstttt() throws Exception {
-        System.out.println("돼라");
-
-    }
 
 }

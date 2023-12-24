@@ -64,7 +64,7 @@ jobs:
       - name: Set YML
         run: |
           mkdir -p src/main/resources 
-          echo "${{ secrets.APPLICATION }}" | base64 --decode > src/main/resources/application.yml 
+          echo "${{ secrets.APPLICATION }}" | base64 --decode > src/main/resources/application.yaml 
           find src 
 
         ## gradlew 의 권한을 줍니다.
