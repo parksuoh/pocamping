@@ -32,13 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.containsString;
 
 
-@WebMvcTest(controllers = UserController.class,
-        excludeFilters = {
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenGenerator.class),
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenAuthenticationFilter.class),
-                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenService.class),
-        }
-)
+@WebMvcTest(controllers = UserController.class)
 class UserControllerTest {
 
 
@@ -54,7 +48,8 @@ class UserControllerTest {
     @MockBean
     private AuthUserService authUserService;
 
-
+    @MockBean
+    private AccessTokenService accessTokenService;
 
 
 
@@ -93,29 +88,29 @@ class UserControllerTest {
     @DisplayName("POST /api/user/auth 인증 성공")
     @WithMockUser
     void authSuccess() throws Exception {
-//        String name = "user1";
-//        String role = "ROLE_USER";
-//        String token = "token1234";
-//
-//        String json = String.format(
-//                """
-//                        {
-//                            "token": "%s"
-//                        }
-//                        """,
-//                token
-//        );
-//
-//        AuthUserDto authUserDto = new AuthUserDto(name, role, token);
-//
-//        given(authUserService.auth(token))
-//                .willReturn(authUserDto);
-//
-//        mockMvc.perform(post("/api/user/auth")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(json).with(csrf()))
-//                .andExpect(status().isOk())
-//                .andExpect(content().string(containsString("token1234")));
+        String name = "user1";
+        String role = "ROLE_USER";
+        String token = "token1234";
+
+        String json = String.format(
+                """
+                        {
+                            "token": "%s"
+                        }
+                        """,
+                token
+        );
+
+        AuthUserDto authUserDto = new AuthUserDto(name, role, token);
+
+        given(authUserService.auth(token))
+                .willReturn(authUserDto);
+
+        mockMvc.perform(post("/api/user/auth")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json).with(csrf()))
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("token1234")));
 
     }
 
@@ -124,26 +119,26 @@ class UserControllerTest {
     @DisplayName("POST /api/user/register 회원가입 성공")
     @WithMockUser
     void registerSuccess() throws Exception {
-//        String name = "newuser";
-//        String password = "1234";
-//
-//        String json = String.format(
-//                """
-//                        {
-//                            "name": "%s",
-//                            "password": "%s"
-//                        }
-//                        """,
-//                name, password
-//        );
-//
-//        given(registerService.register(name, password))
-//                .willReturn("token123");
-//
-//        mockMvc.perform(post("/api/user/register")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(json).with(csrf()))
-//                .andExpect(status().isCreated());
+        String name = "newuser";
+        String password = "1234";
+
+        String json = String.format(
+                """
+                        {
+                            "name": "%s",
+                            "password": "%s"
+                        }
+                        """,
+                name, password
+        );
+
+        given(registerService.register(name, password))
+                .willReturn("token123");
+
+        mockMvc.perform(post("/api/user/register")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json).with(csrf()))
+                .andExpect(status().isCreated());
 
     }
 

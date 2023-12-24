@@ -23,7 +23,7 @@ public class AccessTokenGenerator {
     public String generate(String name, Role role) {
         return JWT.create()
                 .withClaim("name", name)
-                .withClaim("role", role.ordinal())
+                .withClaim("role", role.toString())
                 .withExpiresAt(Instant.now().plus(24, ChronoUnit.HOURS))
                 .sign(algorithm);
     }

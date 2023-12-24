@@ -32,42 +32,51 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests((authorize) ->
                     authorize
                             .requestMatchers(HttpMethod.GET,
-                                    "/api/admin/**").hasAuthority(Role.ROLE_ADMIN.toString())
+                                    "/api/admin/**"
+                            ).hasAuthority(Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.POST,
-                                    "/api/admin/**").hasAuthority(Role.ROLE_ADMIN.toString())
+                                    "/api/admin/**"
+                            ).hasAuthority(Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.PATCH,
-                                    "/api/admin/**").hasAuthority(Role.ROLE_ADMIN.toString())
+                                    "/api/admin/**"
+                            ).hasAuthority(Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.DELETE,
-                                    "/api/admin/*").hasAuthority(Role.ROLE_ADMIN.toString())
+                                    "/api/admin/*"
+                            ).hasAuthority(Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.GET,
                                 "/api/cart"
-                                    , "/api/order").hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
+                                    , "/api/order"
+                            ).hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.POST,
                                 "/api/cart"
                                 , "/api/order"
-                                ,"api/place").hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
+                                ,"api/place"
+                            ).hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.PATCH,
-                                    "/api/cart").hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
+                                    "/api/cart"
+                            ).hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.DELETE,
-                                    "/api/cart/*").hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
+                                    "/api/cart/*"
+                            ).hasAnyAuthority(Role.ROLE_USER.toString(), Role.ROLE_ADMIN.toString())
 
 
                             .requestMatchers(HttpMethod.POST,
-                                    "/api/user/*").permitAll()
+                                    "/api/user/*"
+                            ).permitAll()
 
 
                             .requestMatchers(HttpMethod.GET,
@@ -77,7 +86,8 @@ public class WebSecurityConfig {
                                     "/api/product/detail/*",
                                     "/api/place",
                                     "/api/place/detail/*",
-                                    "/api/place/reservations/*").permitAll()
+                                    "/api/place/reservations/*"
+                            ).permitAll()
 
 
                             .anyRequest().authenticated());
