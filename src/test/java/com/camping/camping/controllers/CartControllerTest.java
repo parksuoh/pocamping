@@ -38,13 +38,11 @@ class CartControllerTest extends ControllerTest {
 
 
 
-    @Test
-    @DisplayName("GET /api/cart 카트목록 성공")
+//    @Test
+//    @DisplayName("GET /api/cart 카트목록 성공")
 //    @WithMockUser(userName)
-    void getCartSuccess() throws Exception {
-
-        System.out.println("ㅇㅇㅇㅇ");
-
+//    void getCartSuccess() throws Exception {
+//
 //        CartItemsResponseDto responseDto = new CartItemsResponseDto(
 //                10L,
 //                2,
@@ -69,7 +67,7 @@ class CartControllerTest extends ControllerTest {
 //                        .header("Authorization", "Bearer " + userAccessToken)
 //                )
 //                .andExpect(status().isOk());
-    }
+//    }
 
 
 
