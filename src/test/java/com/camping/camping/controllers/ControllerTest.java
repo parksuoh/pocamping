@@ -32,8 +32,8 @@ public class ControllerTest {
 
     protected String adminAccessToken;
 
-
-    private final String secret = "testSecret";
+    @Value("${jwt.secret}")
+    private String secret;
 
     private Algorithm algorithm;
 
