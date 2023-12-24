@@ -42,15 +42,6 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-
-//@WebMvcTest(controllers = CartController.class,
-//        excludeFilters = {
-////                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenGenerator.class),
-//                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenAuthenticationFilter.class),
-////                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = AccessTokenService.class),
-//        }
-//)
-
 @WebMvcTest(CartController.class)
 class CartControllerTest extends ControllerTest {
 
@@ -68,36 +59,36 @@ class CartControllerTest extends ControllerTest {
 
 
 
-    @Test
-    @DisplayName("GET /api/cart 카트목록 성공")
-    @WithMockUser(userName)
-    void getCartSuccess() throws Exception {
-
-        CartItemsResponseDto responseDto = new CartItemsResponseDto(
-                10L,
-                2,
-                1L,
-                "test1",
-                1000L,
-                1L,
-                "test1-1",
-                100L,
-                1L,
-                "test1-1-1",
-                10L,
-                1110L,
-                2220L
-        );
-
-
-        given(getCartItemsService.getCartItems(userName))
-                .willReturn(List.of(responseDto));
-
+//    @Test
+//    @DisplayName("GET /api/cart 카트목록 성공")
+//    @WithMockUser(userName)
+//    void getCartSuccess() throws Exception {
+//
+//        CartItemsResponseDto responseDto = new CartItemsResponseDto(
+//                10L,
+//                2,
+//                1L,
+//                "test1",
+//                1000L,
+//                1L,
+//                "test1-1",
+//                100L,
+//                1L,
+//                "test1-1-1",
+//                10L,
+//                1110L,
+//                2220L
+//        );
+//
+//
+//        given(getCartItemsService.getCartItems(userName))
+//                .willReturn(List.of(responseDto));
+//
 //        mockMvc.perform(get("/api/cart")
 //                        .header("Authorization", "Bearer " + userAccessToken)
 //                )
 //                .andExpect(status().isOk());
-    }
+//    }
 
 
 
