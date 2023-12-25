@@ -26,14 +26,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 
-class GetProductDetailServiceTest {
+class GetAdminProductDetailServiceTest {
+
 
     private ProductRepository productRepository;
     private ProductImageRepository productImageRepository;
+
     private ProductFirstOptionRepository productFirstOptionRepository;
     private ProductSecondOptionRepository productSecondOptionRepository;
-
-    private GetProductDetailService getProductDetailService;
+    private GetAdminProductDetailService getAdminProductDetailService;
 
     @BeforeEach
     void setUp() {
@@ -43,17 +44,19 @@ class GetProductDetailServiceTest {
         productFirstOptionRepository = mock(ProductFirstOptionRepository.class);
         productSecondOptionRepository = mock(ProductSecondOptionRepository.class);
 
-        getProductDetailService = new GetProductDetailService(
+
+        getAdminProductDetailService = new GetAdminProductDetailService(
                 productRepository,
                 productImageRepository,
                 productFirstOptionRepository,
                 productSecondOptionRepository
         );
+
     }
 
     @Test
-    @DisplayName("상품 상세 가져오기 테스트")
-    void getProductDetailTest() {
+    @DisplayName("관리자 상품 상세 가져오기 테스트")
+    void getProductDetailTest(){
 
         Category category = new Category(new Name("testcate1"));
 
@@ -81,7 +84,6 @@ class GetProductDetailServiceTest {
                 new Money(10L)
         );
 
-
         given(productRepository
                 .findById(product.id()))
                 .willReturn(Optional.of(product));
@@ -95,17 +97,14 @@ class GetProductDetailServiceTest {
                 .willReturn(List.of(firstOption));
 
         given(productSecondOptionRepository
-                        .findByProductFirstOption_Id(firstOption.id()))
+                .findByProductFirstOption_Id(firstOption.id()))
                 .willReturn(List.of(secondOption));
 
-
-        GetProductDetailDto productDetail = getProductDetailService.getProductDetail(product.id());
+        GetProductDetailDto productDetail = getAdminProductDetailService.getProductDetail(product.id());
 
         assertThat(productDetail.name()).isEqualTo("testProduct");
 
     }
-
-
 
 
 

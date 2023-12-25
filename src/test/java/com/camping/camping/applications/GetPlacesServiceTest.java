@@ -15,7 +15,6 @@ import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.assertj.core.api.Assertions.assertThat;

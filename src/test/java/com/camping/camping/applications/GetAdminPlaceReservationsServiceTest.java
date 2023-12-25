@@ -10,41 +10,34 @@ import com.camping.camping.domains.vo.ReservationStatus;
 import com.camping.camping.domains.vo.Role;
 import com.camping.camping.dtos.GetPlaceReservationResponseDto;
 import com.camping.camping.repositories.PlaceReservationRepository;
-import com.camping.camping.repositories.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class GetPlaceReservationsServiceTest {
+class GetAdminPlaceReservationsServiceTest {
 
-    private UserRepository userRepository;
     private PlaceReservationRepository placeReservationRepository;
-    private GetPlaceReservationsService getPlaceReservationsService;
-
+    private GetAdminPlaceReservationsService getAdminPlaceReservationsService;
 
     @BeforeEach
     void setUp() {
 
-        userRepository = mock(UserRepository.class);
         placeReservationRepository = mock(PlaceReservationRepository.class);
-        getPlaceReservationsService = new GetPlaceReservationsService(
-                userRepository,
-                placeReservationRepository
-        );
+
+        getAdminPlaceReservationsService = new GetAdminPlaceReservationsService(placeReservationRepository);
 
     }
 
     @Test
-    @DisplayName("예약목록 가져오기 테스트")
-    void getPlaceReservationsTest() {
+    @DisplayName("관리자 예약목록 가져오기 테스트")
+    void getPlaceReservationsTest(){
         String name = "user10";
         String password = "1234";
         String encodedePassword = "$argon2id$v=19$m=16384,t=2,p=1$5YZYj8U2tIXC8yLu9u9s5A$AFPPJqVyNqUw0BTi53Uwr25FW32zjscZ8/8HsGLBuZU";
@@ -70,22 +63,16 @@ class GetPlaceReservationsServiceTest {
                 ReservationStatus.REQUEST
         );
 
-        given(userRepository
-                .findByName(name))
-                .willReturn(Optional.of(user));
 
         given(placeReservationRepository
-                .findByUser_IdOrderByIdDesc(user.id()))
+                .findAllByOrderByIdDesc())
                 .willReturn(List.of(placeReservation));
 
-
-        List<GetPlaceReservationResponseDto> placeReservations = getPlaceReservationsService.getPlaceReservations(user.name());
+        List<GetPlaceReservationResponseDto> placeReservations = getAdminPlaceReservationsService.getPlaceReservations();
 
         assertThat(placeReservations).hasSize(1);
 
     }
-
-
 
 
 }

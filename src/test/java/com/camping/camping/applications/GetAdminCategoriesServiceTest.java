@@ -7,6 +7,7 @@ import com.camping.camping.repositories.CategoryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -14,37 +15,36 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class GetCategoryServiceTest {
+
+class GetAdminCategoriesServiceTest {
 
     private CategoryRepository categoryRepository;
-
-    private GetCategoryService getCategoryService;
+    private GetAdminCategoriesService getAdminCategoriesService;
 
     @BeforeEach
     void setUp(){
-
         categoryRepository = mock(CategoryRepository.class);
 
-        getCategoryService = new GetCategoryService(
-                categoryRepository
-        );
+        getAdminCategoriesService = new GetAdminCategoriesService(categoryRepository);
 
     }
 
+
     @Test
-    @DisplayName("카테고리 목록 가져오기 테스트")
-    void getCartegoryTest() {
+    @DisplayName("관리자 카테고리 목록 가져오기 테스트")
+    void getCategoriesTest(){
 
         Category cates = new Category(new Name("testCate1"));
 
-        given(categoryRepository.findAll()).willReturn(List.of(cates));
+        given(categoryRepository
+                .findAll(Sort.by(Sort.Direction.DESC, "id")))
+                .willReturn(List.of(cates));
 
-        List<CategoryItemDto> categories = getCategoryService.getCategories();
+        List<CategoryItemDto> categories = getAdminCategoriesService.getCategories();
 
         assertThat(categories).hasSize(1);
 
     }
-
 
 
 }

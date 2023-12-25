@@ -9,17 +9,13 @@ import com.camping.camping.domains.vo.Role;
 import com.camping.camping.domains.vo.SecondOptionName;
 import com.camping.camping.dtos.CartItemsResponseDto;
 import com.camping.camping.dtos.GetCartItemsDto;
-import com.camping.camping.exceptions.NameAlreadyExist;
 import com.camping.camping.exceptions.NameNotExist;
-import com.camping.camping.repositories.CartItemRepository;
 import com.camping.camping.repositories.CartRepository;
 import com.camping.camping.repositories.UserRepository;
 import com.camping.camping.repositories.daos.JdbcCartItemRepository;
-import com.camping.camping.security.AccessTokenGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;

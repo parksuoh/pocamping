@@ -1,48 +1,47 @@
 package com.camping.camping.applications;
 
+import com.camping.camping.aws.S3DeleteService;
 import com.camping.camping.domains.Category;
 import com.camping.camping.domains.Product;
 import com.camping.camping.domains.ProductImage;
 import com.camping.camping.domains.vo.Description;
 import com.camping.camping.domains.vo.Money;
 import com.camping.camping.domains.vo.Name;
-import com.camping.camping.dtos.GetProductByCategoryDto;
 import com.camping.camping.repositories.ProductImageRepository;
-import com.camping.camping.repositories.ProductRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.data.domain.Sort;
 
-import java.util.List;
+import java.io.IOException;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
 
-class GetProductsServiceTest {
+class DeleteProductImageServiceTest {
 
-    private ProductRepository productRepository;
+    private S3DeleteService s3DeleteService;
     private ProductImageRepository productImageRepository;
-
-    private GetProductsService getProductsService;
+    private DeleteProductImageService deleteProductImageService;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
 
-        productRepository = mock(ProductRepository.class);
+        s3DeleteService = mock(S3DeleteService.class);
         productImageRepository = mock(ProductImageRepository.class);
 
-        getProductsService = new GetProductsService(
-                productRepository,
+        deleteProductImageService = new DeleteProductImageService(
+                s3DeleteService,
                 productImageRepository
         );
+
     }
 
+
     @Test
-    @DisplayName("상품 리스트 가져오기 테스트")
-    void getProductsTest() {
+    @DisplayName("상품이미지 삭제 테스트")
+    void deleteProductImageTest() throws IOException {
 
         Category category = new Category(new Name("testcate1"));
 
@@ -58,18 +57,21 @@ class GetProductsServiceTest {
                 "testUrl"
         );
 
-        given(productRepository.findAll(Sort.by(Sort.Direction.DESC, "id")))
-                .willReturn(List.of(product));
 
         given(productImageRepository
-                .findByProduct_Id(product.id()))
-                .willReturn(List.of(productImage));
+                .findById(product.id()))
+                .willReturn(Optional.of(productImage));
 
-        List<GetProductByCategoryDto> products = getProductsService.getProducts(category.id());
+        s3DeleteService.deleteFile(productImage.url());
 
-        assertThat(products).hasSize(1);
+        productImageRepository.delete(productImage);
 
+        String res = deleteProductImageService.deleteProductImage(productImage.id());
+
+        assertThat(res).isEqualTo("success");
     }
+
+
 
 
 

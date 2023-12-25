@@ -19,27 +19,27 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class GetPlaceDetailServiceTest {
+class GetAdminPlaceServiceTest {
+
     private PlaceRepository placeRepository;
     private PlaceImageRepository placeImageRepository;
-    private GetPlaceDetailService getPlaceDetailService;
-
+    private GetAdminPlaceService getAdminPlaceService;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
 
         placeRepository = mock(PlaceRepository.class);
         placeImageRepository = mock(PlaceImageRepository.class);
-        getPlaceDetailService = new GetPlaceDetailService(
+
+        getAdminPlaceService = new GetAdminPlaceService(
                 placeRepository,
                 placeImageRepository
         );
     }
 
-
     @Test
-    @DisplayName("장소상세 가져오기 테스트")
-    void getPlaceDetailTest() {
+    @DisplayName("관리자 장소상세 가져오기 테스트")
+    void getPlaceTest() {
 
         Place place = new Place(
                 new Name("testPlace"),
@@ -58,11 +58,10 @@ class GetPlaceDetailServiceTest {
                 .findByPlace_Id(place.id()))
                 .willReturn(List.of(placeImage));
 
-        GetPlaceDetailResponseDto placeDetail = getPlaceDetailService.getPlaceDetail(place.id());
+        GetPlaceDetailResponseDto placeDetail = getAdminPlaceService.getPlace(place.id());
 
         assertThat(placeDetail.name()).isEqualTo("testPlace");
     }
-
 
 
 }
