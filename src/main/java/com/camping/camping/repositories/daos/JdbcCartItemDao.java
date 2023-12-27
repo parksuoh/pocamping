@@ -30,7 +30,7 @@ public class JdbcCartItemDao implements JdbcCartItemRepository {
                        ps.id AS product_second_option_id,
                        ps.second_name AS product_second_option_name,
                        ps.add_price AS product_second_add_price
-                  FROM (SELECT * FROM cart_item WHERE cart_id=2 ) ci
+                  FROM (SELECT * FROM cart_item WHERE cart_id=:cid ) ci
                   INNER JOIN product p
                     ON ci.product_id = p.id
                   INNER JOIN product_first_option pf
