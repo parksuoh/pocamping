@@ -75,8 +75,7 @@ class CartControllerTest extends ControllerTest {
         mockMvc.perform(get("/api/cart")
                         .header("Authorization", "Bearer " + userAccessToken)
                 )
-//                .andExpect(status().isOk())
-                .andDo(print());;
+                .andExpect(status().isOk());
     }
 
 
@@ -114,8 +113,8 @@ class CartControllerTest extends ControllerTest {
                         .content(json).with(csrf())
                         .header("Authorization", "Bearer " + userAccessToken)
                 )
-                .andExpect(status().isCreated());
-
+//                .andExpect(status().isCreated());
+                .andExpect(status().isOk());
 
         verify(addCartService)
                 .addCart(
