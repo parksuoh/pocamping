@@ -84,22 +84,31 @@ public class Order {
     }
 
     public void changeOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+        if(orderStatus.toString().equals("READY")){
+            toReady();
+        } else if (orderStatus.toString().equals("DELIVERY")) {
+            toDelivery();
+        } else if (orderStatus.toString().equals("COMPLETE")) {
+            toComplete();
+        } else if (orderStatus.toString().equals("CANCELED")) {
+            toCanceled();
+        }
+
     }
 
-    public void toReady() {
+    private void toReady() {
         this.orderStatus = OrderStatus.READY;
     }
 
-    public void toDelivery() {
+    private void toDelivery() {
         this.orderStatus = OrderStatus.DELIVERY;
     }
 
-    public void toComplete() {
+    private void toComplete() {
         this.orderStatus = OrderStatus.COMPLETE;
     }
 
-    public void toCanceled() {
+    private void toCanceled() {
         this.orderStatus = OrderStatus.CANCELED;
     }
 

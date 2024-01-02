@@ -36,7 +36,6 @@ public class GetCartItemsService {
 
         List<GetCartItemsDto> cartItems = jdbcCartItemRepository.findByCartId(cart.id());
 
-        System.out.println(cartItems.size());
 
         return cartItems
                 .stream()

@@ -31,7 +31,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class GetAdminOrderListServiceTest {
 
 
-    private UserRepository userRepository;
     private OrderRepository orderRepository;
     private OrderItemRepository orderItemRepository;
     private GetAdminOrderListService getAdminOrderListService;
@@ -39,12 +38,10 @@ class GetAdminOrderListServiceTest {
     @BeforeEach
     void setUp(){
 
-        userRepository = mock(UserRepository.class);
         orderRepository = mock(OrderRepository.class);
         orderItemRepository = mock(OrderItemRepository.class);
 
         getAdminOrderListService = new GetAdminOrderListService(
-                userRepository,
                 orderRepository,
                 orderItemRepository
         );

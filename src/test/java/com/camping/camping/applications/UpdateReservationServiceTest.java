@@ -82,13 +82,7 @@ class UpdateReservationServiceTest {
 
         }
 
-        if(status.toString().equals("REQUEST")){
-            placeReservation.toRequest();
-        } else if (status.toString().equals("CONFIRM")) {
-            placeReservation.toConfirm();
-        } else if (status.toString().equals("RESERVATION_CANCELED")) {
-            placeReservation.toCancel();
-        }
+        placeReservation.changeReservationStatus(status);
 
         placeReservationRepository.save(placeReservation);
 

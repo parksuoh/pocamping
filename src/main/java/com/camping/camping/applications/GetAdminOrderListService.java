@@ -19,12 +19,10 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class GetAdminOrderListService {
 
-    private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
 
-    public GetAdminOrderListService(UserRepository userRepository, OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
-        this.userRepository = userRepository;
+    public GetAdminOrderListService(OrderRepository orderRepository, OrderItemRepository orderItemRepository) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
     }

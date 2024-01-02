@@ -57,15 +57,7 @@ class UpdateOrderServiceTest {
                 .findById(order.id()))
                 .willReturn(Optional.of(order));
 
-        if(status.toString().equals("READY")){
-            order.toReady();
-        } else if (status.toString().equals("DELIVERY")) {
-            order.toDelivery();
-        } else if (status.toString().equals("COMPLETE")) {
-            order.toComplete();
-        } else if (status.toString().equals("CANCELED")) {
-            order.toCanceled();
-        }
+        order.changeOrderStatus(status);
 
         orderRepository.save(order);
 

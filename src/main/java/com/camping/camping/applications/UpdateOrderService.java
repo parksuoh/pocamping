@@ -5,7 +5,6 @@ import com.camping.camping.domains.vo.OrderStatus;
 import com.camping.camping.exceptions.OrderNotExist;
 import com.camping.camping.repositories.OrderRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UpdateOrderService {
@@ -22,15 +21,7 @@ public class UpdateOrderService {
 
         Order order = orderRepository.findById(orderId).orElseThrow(OrderNotExist::new);
 
-        if(status.toString().equals("READY")){
-            order.toReady();
-        } else if (status.toString().equals("DELIVERY")) {
-            order.toDelivery();
-        } else if (status.toString().equals("COMPLETE")) {
-            order.toComplete();
-        } else if (status.toString().equals("CANCELED")) {
-            order.toCanceled();
-        }
+        order.changeOrderStatus(status);
 
         orderRepository.save(order);
         return "success";

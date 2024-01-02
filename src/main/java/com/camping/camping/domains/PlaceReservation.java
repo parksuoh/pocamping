@@ -87,18 +87,24 @@ public class PlaceReservation {
     public ReservationStatus reservationStatus() {return reservationStatus;}
 
     public void changeReservationStatus(ReservationStatus reservationStatus){
-        this.reservationStatus = reservationStatus;
+        if(reservationStatus.toString().equals("REQUEST")){
+            toRequest();
+        } else if (reservationStatus.toString().equals("CONFIRM")) {
+            toConfirm();
+        } else if (reservationStatus.toString().equals("RESERVATION_CANCELED")) {
+            toCancel();
+        }
     }
 
-    public void toRequest() {
+    private void toRequest() {
         this.reservationStatus = ReservationStatus.REQUEST;
     }
 
-    public void toConfirm() {
+    private void toConfirm() {
         this.reservationStatus = ReservationStatus.CONFIRM;
     }
 
-    public void toCancel() {
+    private void toCancel() {
         this.reservationStatus = ReservationStatus.RESERVATION_CANCELED;
     }
 
